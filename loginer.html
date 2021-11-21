@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    
+
+    <script>
+        if(localStorage.getItem("active")){
+           
+
+            location.href= "home.html"
+
+        }
+
+    </script>
+
+</head>
+<style>
+*{margin:0;padding: 0;}
+.title {
+    background: red;
+    text-align: center;
+    padding: 32px 0px;
+    color: white;
+}
+.title h1 {
+    text-transform: uppercase;
+    font-family: arial;
+}
+.fromWrapper {
+    width: 300px;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 50px;
+    border-radius: 5px;
+    /* border: 1px solid; */
+    background: #f7f7f778;
+    box-shadow: 0px 0px 31px 6px #ddd;
+    margin-top: 10px;
+}
+.fromWrapper h2 {
+    margin-bottom: 27px;
+    text-align: center;
+}
+
+form input {
+    width: 93%;
+    margin: 5px 0px;
+    padding: 7px 5px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    border-left: 3px solid #03a9f4;
+}
+button {
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding: 8px 12px;
+    background: #03a9f4;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button#btn:hover {
+    background: #2196f3;
+   
+}
+form span {
+    font-size: 13px;
+    font-weight: 600;
+    /* margin-top: 5px; */
+}
+
+form a {
+    text-decoration: none;
+    font-family: arial;
+    color: red;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+</style>
+
+<body>
+
+   <div class= "title"><h1>Welcome to my Log In Page</h1> </div>
+   <div class="fromWrapper">   
+    <h2>Log In From!</h2>
+
+    <form action="">
+
+        <label for="email">Email</label>
+        <input id="email" type= "text" placeholder="Enter your Email"/>
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter your password"/>
+
+        <button type= "submit" id ="btn">Log In</button>
+        <span>don't have an account?</span><a href="singin.html">Sing up</a>
+
+
+
+    </form>
+    </div>
+
+    
+
+    <script>
+        const emailAddress = document.querySelector("#email");
+        const password = document.querySelector("#password");
+
+
+        document.querySelector("#btn").addEventListener("click",(e)=>{
+            e.preventDefault();
+
+            const allDeta = JSON.parse( localStorage.getItem("userInfo"));
+
+            if(emailAddress.value===allDeta.eMail && password.value===allDeta.pass){
+
+                //alert("Log in successfull !");
+                
+                
+                localStorage.setItem("active",JSON.stringify(true));
+                location.href = "home.html"
+
+            }else{
+                
+                swal({
+                title: "Opps!",
+                text: "something went wrong!",
+                icon: "warning",
+                button: "Aww yiss!",
+                });
+                emailAddress.style.border = "1px solid red";
+                password.style.border = "1px solid red"
+            }
+            if(emailAddress.value==="" && password.value===""){
+
+                alert("please inter your Email or Password");
+
+            }
+                
+            document.querySelector("#email").value = "";
+        document.querySelector("#password").value = "";
+
+        });
+
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+</html>
